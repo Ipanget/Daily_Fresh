@@ -108,3 +108,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # 设置静态文件地址
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = '17610898052@163.com'  # 发送邮件的邮箱
+EMAIL_HOST_PASSWORD = 'linsijian233'  # 在邮箱中设置的客户端授权密码
+EMAIL_FROM = 'LSJOP<17610898052@163.com>'  # 收件人看到的发件人

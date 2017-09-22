@@ -12,7 +12,7 @@
     <script src="{% static 'js/sha1.js' %}"></script>
     <script>
         $(function () {
-            $('#form').submit(function () {
+            $('#reg_form2').submit(function (){
                // 当点击submit时将密码加密
                 $('#pwd').val(hex_sha1($('#pwd').val()))
             })
@@ -33,7 +33,7 @@
 				<a href="#">登录</a>
 			</div>
 			<div class="reg_form clearfix">
-				<form id="form" method="post" action="/user/register_handle/">
+				<form id="reg_form2"  method="post" action="/user/register_handle/">
                     {% csrf_token %}
 				<ul>
 					<li>

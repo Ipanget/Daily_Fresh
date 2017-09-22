@@ -14,16 +14,16 @@
            $('#form').submit(function (event) {
                event.preventDefault();  // 阻止表单提交
                username = $('.name_input').val()
-               password = $('.pass_input').val()
-               hash = hex_sha1(password)  // 使用md5加密
+               password = hex_sha1($('.pass_input').val())  // 使用sha1加密
                csrf = $('input[name="csrfmiddlewaretoken"]').val()
-               $.post('/user/login_check/',{'csrfmiddlewaretoken':csrf, 'username':username, 'pwd':hash}, function (data) {
+               remember = $('input[name="remember"]').is(':checked')  // 是否记住用户名
+               $.post('/user/login_check/',{'csrfmiddlewaretoken':csrf, 'username':username, 'pwd':password, 'remember':remember}, function (data){
                     if(data.res == 1){
                         window.location = '/user/goods/'  // 登录成功后跳转到商品首页
                     }
-                    else {
-                        $('.user_error').fadeIn()
-                        $('.pwd_error').fadeIn()
+                    else{
+                        $('.user_error').html('用户名或密码错误').fadeIn()  // 用户名错误
+                        $('.pwd_error').html('用户名或密码错误').fadeIn()  // 密码错误
                     }
                })
            })
@@ -47,12 +47,12 @@
 				<div class="form_input">
 					<form id="form">
                         {% csrf_token %}
-						<input type="text" name="username" class="name_input" placeholder="请输入用户名">
+						<input type="text" name="username" class="name_input" placeholder="请输入用户名" value="{{username}}">
 						<div class="user_error">输入错误</div>
 						<input type="password" name="pwd" class="pass_input" placeholder="请输入密码">
 						<div class="pwd_error">输入错误</div>
 						<div class="more_input clearfix">
-							<input type="checkbox" name="">
+							<input type="checkbox" name="remember">
 							<label>记住用户名</label>
 							<a href="#">忘记密码</a>
 						</div>

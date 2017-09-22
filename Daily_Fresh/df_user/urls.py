@@ -12,5 +12,6 @@ urlpatterns = [
 
     url('^goods/$', views.home_list_page)  # 首页首页商品信息
 
+
 ]
 

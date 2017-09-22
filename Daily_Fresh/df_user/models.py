@@ -7,7 +7,7 @@ from db.base_model import BaseModel
 class AccountInfoManger(models.Manager):
     """ 账户模型管理器类 """
     def add_one_passport(self, username, password, email):
-        '''添加用户注册信息'''
+        """添加用户注册信息"""
         # 1.获取self所在模型类
         models_class = self.model
         # 2.创建model_class模型类对象
@@ -15,6 +15,17 @@ class AccountInfoManger(models.Manager):
         # 3.保存进数据库
         obj.save()
         return obj
+
+    def get_one_passport(self, username, password=None):
+        """用户和密码校验"""
+        if password is None:
+            # 校验用户名是否重名
+            obj = self.filter(username=username).exists()
+            return obj
+        else:
+            # 登录校验
+            obj = self.filter(username=username, password=password).exists()
+            return obj
 
 
 class AccountInfo(BaseModel):

@@ -50,13 +50,14 @@ $(function(){
 		{
 			var username = $('#user_name').val();
 			var csrf = $('input[name="csrfmiddlewaretoken"]').val()
+			// 当用户名符合要求进行用户名是否重名判断
 			$.post('/user/register_check/',{'username': username, 'csrfmiddlewaretoken': csrf}, function (data) {
 				if(data.res == 1){
 					$('#user_name').next().html('用户名已存在');
 					$('#user_name').next().show();
 					error_name = true;
-				}else {
-
+				}
+				else {
 					$('#user_name').next().hide();
 					error_name = false;
 				}
@@ -116,7 +117,7 @@ $(function(){
 	}
 
 
-	$('#reg_form').submit(function() {
+	$('#reg_form2').submit(function() {
 		check_user_name();
 		check_pwd();
 		check_cpwd();
