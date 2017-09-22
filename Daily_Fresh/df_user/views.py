@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import AccountInfo
 
-
-
 # Create your views here.
+
+
+def home_list_page(request):
+    """首页商品"""
+    return render(request, 'home/index.html')
+
 
 def login(request):
     '''显示登录页面'''

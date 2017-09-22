@@ -7,16 +7,23 @@
 	<title>天天生鲜-登录</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <script src="{%  static 'js/sha1.js' %}"></script>
     <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
     <script>
        $(function () {
-           $('.input_submit').submit(function () {
-               username = $('.name_input')
-               password = $('.pass_input')
+           $('#form').submit(function (event) {
+               event.preventDefault();  // 阻止表单提交
+               username = $('.name_input').val()
+               password = $('.pass_input').val()
+               hash = hex_sha1(password)  // 使用md5加密
                csrf = $('input[name="csrfmiddlewaretoken"]').val()
-               $.get('/user/login_check/',{'csrfmiddlewaretoken':csrf,'username':username,'pwd':password},function (data) {
-                    if(data.res == 0){
-                        location.href = '/user/'
+               $.post('/user/login_check/',{'csrfmiddlewaretoken':csrf, 'username':username, 'pwd':hash}, function (data) {
+                    if(data.res == 1){
+                        window.location = '/user/goods/'  // 登录成功后跳转到商品首页
+                    }
+                    else {
+                        $('.user_error').fadeIn()
+                        $('.pwd_error').fadeIn()
                     }
                })
            })
@@ -25,7 +32,7 @@
 </head>
 <body>
 	<div class="login_top clearfix">
-		<a href="index.html" class="login_logo"><img src="{% static 'images/logo02.png' %}"></a>
+		<a href="../home/index.html" class="login_logo"><img src="{% static 'images/logo02.png' %}"></a>
 	</div>
 
 	<div class="login_form_bg">
@@ -38,7 +45,7 @@
 					<a href="#">立即注册</a>
 				</div>
 				<div class="form_input">
-					<form>
+					<form id="form">
                         {% csrf_token %}
 						<input type="text" name="username" class="name_input" placeholder="请输入用户名">
 						<div class="user_error">输入错误</div>

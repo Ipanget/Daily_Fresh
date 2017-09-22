@@ -9,6 +9,15 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 	<script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/register.js' %}"></script>
+    <script src="{% static 'js/sha1.js' %}"></script>
+    <script>
+        $(function () {
+            $('#form').submit(function () {
+               // 当点击submit时将密码加密
+                $('#pwd').val(hex_sha1($('#pwd').val()))
+            })
+        })
+    </script>
 </head>
 <body>
 	<div class="register_con">
@@ -24,7 +33,7 @@
 				<a href="#">登录</a>
 			</div>
 			<div class="reg_form clearfix">
-				<form method="post" action="/user/register_handle/">
+				<form id="form" method="post" action="/user/register_handle/">
                     {% csrf_token %}
 				<ul>
 					<li>
