@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'df_user'  # 用户注册应用
+    'df_user',  # 用户注册应用
+    'djcelery',  # 注册celery
 )
 
 MIDDLEWARE_CLASSES = (
@@ -115,3 +116,9 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = '17610898052@163.com'  # 发送邮件的邮箱
 EMAIL_HOST_PASSWORD = 'linsijian233'  # 在邮箱中设置的客户端授权密码
 EMAIL_FROM = 'LSJOP<17610898052@163.com>'  # 收件人看到的发件人
+
+
+# 配置celery
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'redis://127.0.0.1:6379/2'
