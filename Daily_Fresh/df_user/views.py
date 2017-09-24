@@ -9,8 +9,38 @@ from django.views.decorators.http import require_http_methods, require_POST, req
 
 
 def home_list_page(request):
-    """首页商品"""
-    return render(request, 'home/index.html')
+    """商品首页"""
+    return render(request, 'df_user/index.html')
+
+
+def user(request):
+    """个人信息页"""
+    return render(request, 'df_user/user_center_info.html')
+
+
+def order(request):
+    """用户订单页面"""
+    return render(request, 'df_user/user_center_order.html')
+
+
+def goods_detail(request, num):
+    """商品详情页"""
+    return render(request, 'df_user/detail.html')
+
+
+def goods_list(request):
+    """商品列表页"""
+    return render(request, 'df_user/list.html')
+
+
+def cart_show(request):
+    """购物车页显示"""
+    return render(request, 'df_user/cart.html')
+
+
+def address(reques):
+    """用户地址页面"""
+    return render(reques, 'df_user/user_center_site.html')
 
 
 @require_http_methods(['GET', 'POST'])
