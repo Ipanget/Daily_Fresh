@@ -1,7 +1,7 @@
 {% extends 'base_user_center.html' %}
-{% load static from staticfiles %}
+{%load static from staticfiles%}
+{% block title %}天天生鲜-用户中心{% endblock title %}
 {% block block %}
-{{ block.super }}
 	<div class="main_con clearfix">
 		<div class="left_menu_con clearfix">
 			<h3>用户中心</h3>
@@ -44,6 +44,4 @@
 				</div>
 		</div>
 	</div>
-
-{% endblock %}
-
+{% endblock block %}

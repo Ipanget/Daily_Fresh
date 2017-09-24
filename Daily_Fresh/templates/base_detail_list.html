@@ -1,22 +1,14 @@
 {% extends 'base.html' %}
+{%load static from staticfiles%}
+{% block title %}天天生鲜-商品详情{% endblock title%}
 {% block block %}
-<div class="search_bar clearfix">
-		<a href="../index.html" class="logo fl"><img src="images/logo.png"></a>
-		<div class="search_con fl">
-			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
-			<input type="button" class="input_btn fr" name="" value="搜索">
-		</div>
-		<div class="guest_cart fr">
-			<a href="cart.html" class="cart_name fl">我的购物车</a>
-			<div class="goods_count fl" id="show_count">1</div>
-		</div>
-	</div>
-
+	{% block navbar %}
+	<!-- 搜索框下面的状态栏 -->
 	<div class="navbar_con">
 		<div class="navbar clearfix">
 			<div class="subnav_con fl">
-				<h1>全部商品分类</h1>
-				<span></span>
+				<h1>全部商品分类</h1>	
+				<span></span>			
 				<ul class="subnav">
 					<li><a href="#" class="fruit">新鲜水果</a></li>
 					<li><a href="#" class="seafood">海鲜水产</a></li>
@@ -35,13 +27,6 @@
 			</ul>
 		</div>
 	</div>
-    {% block breadcrumb %}
-	<div class="breadcrumb">
-		<a href="#">全部分类</a>
-		<span>></span>
-		<a href="#">新鲜水果</a>
-		<span>></span>
-		<a href="#">商品详情</a>
-	</div>
-    {% endblock %}
-{% endblock %}
+	{% endblock navbar %}
+	{% block blockson %}<!-- 给下级模板的预留块 -->{% endblock blockson %}
+{% endblock block %}

@@ -1,25 +1,29 @@
 {% extends 'base.html' %}
+{%load static from staticfiles%}
+{% block title %}天天生鲜-注册{% endblock title%}
+{% block link %}
+	<script type="text/javascript" src="{% static 'js/register.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/sha1.js'%}"></script> <!-- sha1加密 -->
+{% endblock link %}
+
+{% block top %}<!-- 去除顶部状态栏 -->{% endblock top %}
+{% block search %}<!-- 去除搜索框 -->{% endblock search %}
 {% block block %}
-{% load static from staticfiles %}
-<head>
-    <script>
-        $(function () {
-            $('#reg_form2').submit(function (){
-               // 当点击submit时将密码加密
-                $('#pwd').val(hex_sha1($('#pwd').val()))
-            })
-        })
-    </script>
-</head>
-{% block top %}{% endblock top %}
-<body>
+<script>
+	$(function () {
+		$('#reg_form2').submit(function (){
+		   // 当点击submit时将密码加密
+			$('#pwd').val(hex_sha1($('#pwd').val()))
+		})
+	})
+</script>
+
 	<div class="register_con">
 		<div class="l_con fl">
 			<a class="reg_logo"><img src="{% static 'images/logo02.png' %}"></a>
 			<div class="reg_slogan">足不出户  ·  新鲜每一天</div>
 			<div class="reg_banner"></div>
 		</div>
-
 		<div class="r_con fr">
 			<div class="reg_title clearfix">
 				<h1>用户注册</h1>
@@ -60,8 +64,6 @@
 				</ul>				
 				</form>
 			</div>
-
 		</div>
-
 	</div>
 {% endblock block %}
